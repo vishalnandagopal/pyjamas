@@ -4,8 +4,8 @@ from hashlib import sha256
 
 from dotenv import load_dotenv
 
-
-from .miscellaneous import check_if_exists_in_directory as check_if_exists_in_directory
+from .miscellaneous import \
+    check_if_exists_in_directory as check_if_exists_in_directory
 
 
 def hasher(text: str) -> str:
@@ -98,6 +98,7 @@ def salted_hash_generator(username: str, password: str) -> str:
 
 
 def get_password(username: str, plain_text_password: str) -> str:
+    print(username, plain_text_password)
     return one_time_padder_for_hash(
         salted_hash_generator(username, plain_text_password)
     )
