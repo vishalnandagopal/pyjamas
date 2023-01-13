@@ -13,7 +13,7 @@ def hasher(text: str) -> str:
     return sha256(bytes(text, "utf-8")).hexdigest().upper()
 
 
-def one_time_padder_for_hash(first_hash: str, key: str = None) -> str:
+def pad_hash_with_developer_key(first_hash: str, key: str = None) -> str:
     """
     Function that pads the given text (eg: SHA256 Hash) with the ONE_TIME_PAD_KEY stored in env variable and returns it.
     Key must be same length as first hash
@@ -114,7 +114,7 @@ def get_password(username: str, plain_text_password: str) -> str:
 
     All changes to the base algorithm must be made here, and it will automatically be reflected in other places because everything else is calling this function to generate password hashes, instead of doing it on their own everywhere.
     """
-    return one_time_padder_for_hash(
+    return pad_hash_with_developer_key(
         salted_hash_generator(username, plain_text_password)
     )
 
