@@ -1,7 +1,11 @@
 import csv
 
 from .miscellaneous import check_if_exists_in_directory
-from .passwords import check_password, get_password
+from .passwords import (
+    check_password,
+    get_password,
+    check_if_exists_in_common_passwords_list,
+)
 
 
 def get_database(database_name: str, type_of_db: str = "csv") -> tuple:
@@ -26,7 +30,6 @@ def handle_header_and_creation(database_name: str, type_of_db: str = "csv") -> b
                     return True
             else:
                 if usernames[0] != header[0]:
-                    print("database is empty")
                     with open(database_name, "a") as csv_file_obj:
                         csv_write = csv.writer(
                             csv_file_obj, delimiter=",", lineterminator="\n"
@@ -41,7 +44,7 @@ def handle_header_and_creation(database_name: str, type_of_db: str = "csv") -> b
                 csv_write.writerow(header)
                 return True
     except Exception as e:
-        print(f"Exception while handling headers - \"{str(e)}\"")
+        print(f'Exception while handling headers - "{str(e)}"')
         return False
 
 
@@ -56,9 +59,14 @@ def write_to_database(row_to_write: tuple, database_name: str, type_of_db: str =
                     row[0] for row in get_database(database_name, type_of_db)[1:]
                 )
                 if username not in usernames:
-                    row_to_write[1] = get_password(username, plain_text_password)
-                    csv_write.writerow(row_to_write)
-                    print(f"Securely stored password for {username}")
+                    if not check_if_exists_in_common_passwords_list(
+                        plain_text_password
+                    ):
+                        row_to_write[1] = get_password(username, plain_text_password)
+                        csv_write.writerow(row_to_write)
+                        print(f"Securely stored password for {username}")
+                    else:
+                        print("Password is too common, use a strong password.")
                 else:
                     print(
                         f"Username {username} already exists in database, will not be overwritten."

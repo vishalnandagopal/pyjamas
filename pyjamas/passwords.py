@@ -1,11 +1,9 @@
 import os
 from base64 import b64decode, b64encode
 from hashlib import sha256
-
 from dotenv import load_dotenv
 
-from .miscellaneous import \
-    check_if_exists_in_directory as check_if_exists_in_directory
+from .miscellaneous import check_if_exists_in_directory as check_if_exists_in_directory
 
 
 def hasher(text: str) -> str:
@@ -98,10 +96,26 @@ def salted_hash_generator(username: str, password: str) -> str:
 
 
 def get_password(username: str, plain_text_password: str) -> str:
-    print(username, plain_text_password)
     return one_time_padder_for_hash(
         salted_hash_generator(username, plain_text_password)
     )
+
+
+def check_if_exists_in_common_passwords_list(
+    plain_text_password_to_check: str,
+    list_of_passwords: str = "./static/common-passwords.txt",
+):
+    with open(
+        os.path.dirname(__file__) + "/" + list_of_passwords,
+        "r",
+    ) as pw_file_object:
+        common_passwords = set(
+            map(lambda line: line.strip("\n"), pw_file_object.readlines())
+        )
+    if plain_text_password_to_check in common_passwords:
+        return True
+    else:
+        return False
 
 
 def check_password(
