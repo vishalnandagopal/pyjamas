@@ -1,8 +1,7 @@
-import pyjamas, os, dotenv
+import pyjamas
 
-dotenv.load_dotenv("pyjamas.env")
 
-if os.getenv("TO_INPUT"):
+if pyjamas.load_desired_env_variable("TO_INPUT"):
     username = input("Enter your username: ")
     plain_text_password = pyjamas.getpass("Enter your password: ")
     pyjamas.store_in_database(
