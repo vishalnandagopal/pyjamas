@@ -46,6 +46,10 @@ def write_to_database(row_to_write: tuple, database_name: str, type_of_db: str =
         print(
             f"Username {username} already exists in database, will not be overwritten."
         )
+        if authenticate(username, plain_text_password):
+            print(f'\nCorrect password for user "{username}"')
+        else:
+            print(f'\nWrong password for user "{username}"')
 
 
 def authenticate(username: str, password: str) -> bool:
