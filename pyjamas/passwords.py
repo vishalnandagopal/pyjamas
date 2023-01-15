@@ -78,6 +78,8 @@ def pad_hash_with_developer_key(first_hash: str, key: str = None) -> str:
         return first_hash
     elif len(first_hash) < len(key):
         key = key[0 : len(first_hash)]
+    elif len(first_hash) > len(key):
+        key = hasher(key)
     length = len(numeric_values)
     cipher_text = "".join(
         [
