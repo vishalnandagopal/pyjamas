@@ -7,7 +7,6 @@ from .passwords import (
     check_if_exists_in_common_passwords_list,
 )
 
-
 def get_database(database_name: str, type_of_db: str = "csv") -> tuple:
     if type_of_db == "csv":
         if check_if_exists_in_directory(database_name):
