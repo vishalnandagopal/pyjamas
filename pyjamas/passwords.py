@@ -74,11 +74,10 @@ def pad_hash_with_developer_key(first_hash: str, key: str = None) -> str:
         "9",
         "0",
     )
-    if not key or (len(key) != len(first_hash)):
-        if len(first_hash) < len(key):
-            key = key[0 : len(first_hash)]
-        else:
-            return first_hash
+    if not key:
+        return first_hash
+    elif len(first_hash) < len(key):
+        key = key[0 : len(first_hash)]
     length = len(numeric_values)
     cipher_text = "".join(
         [
