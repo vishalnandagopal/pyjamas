@@ -1,5 +1,6 @@
 from ..miscellaneous import load_desired_env_variable as load_desired_env_variable
 from .hasher import hasher
+
 numeric_values = (
     "A",
     "B",
@@ -53,6 +54,7 @@ def pad_hash_with_developer_key(first_hash: str, key: str = None) -> str:
         key = key[0 : len(first_hash)]
     elif len(first_hash) > len(key):
         key = hasher(key)
+    length = len(first_hash)
     cipher_text = "".join(
         [
             numeric_values[
