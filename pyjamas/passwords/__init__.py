@@ -1,9 +1,7 @@
 from base64 import b64decode, b64encode
-from hashlib import sha256
 
 from .ciphers import *
-from .common_password_checker import check_if_exists_in_common_passwords_list
-
+from .hasher import hasher
 
 def handle_cipher(
     username: str,
@@ -19,14 +17,6 @@ def handle_cipher(
     return pad_hash_with_developer_key(
             salted_hash_generator(username, plain_text_password)
         )
-
-
-def hasher(text: str) -> str:
-    """
-    Takes a UTF-8 encoded piece of text of any length, and returns the SHA-256 hash of the text as a string object, in uppercase.
-    """
-    return sha256(bytes(text, "utf-8")).hexdigest().upper()
-
 
 def salter(username: str) -> str:
     """
