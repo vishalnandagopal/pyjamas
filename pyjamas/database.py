@@ -8,7 +8,7 @@ from .passwords import (
 )
 
 
-def get_database(database_name: str, type_of_db: str = "csv") -> tuple:
+def get_database(database_name: str) -> tuple:
     """
     returns a tuple of reader and writer object given a database name and type (defaults to csv if not provided)
     """
@@ -18,7 +18,7 @@ def get_database(database_name: str, type_of_db: str = "csv") -> tuple:
     return reader, writer
 
 
-def write_to_database(row_to_write: tuple, database_name: str, type_of_db: str = "csv"):
+def write_to_database(row_to_write: tuple, database_name: str):
 
     """
     writes header row if database is empty
@@ -46,17 +46,17 @@ def write_to_database(row_to_write: tuple, database_name: str, type_of_db: str =
         print(
             f"Username {username} already exists in database, will not be overwritten."
         )
-        if authenticate(username, plain_text_password):
+        if authenticate(username, plain_text_password,database_name):
             print(f'\nCorrect password for user "{username}"')
         else:
             print(f'\nWrong password for user "{username}"')
 
 
-def authenticate(username: str, password: str) -> bool:
+def authenticate(username: str, password: str,database_name:str) -> bool:
     """
     checks if username exists and database and hash of password is same as hashed password in database
     """
-    reader, _ = get_database()
+    reader, _ = get_database(database_name)
 
     hashed_pw = [row[1] for row in reader if row[0] == username][0]
 
@@ -67,7 +67,7 @@ def authenticate(username: str, password: str) -> bool:
 
 
 def store_in_database(
-    username: str, plain_text_password: str, database_name: str, type_of_db: str = "csv"
+    username: str, plain_text_password: str, database_name: str
 ):
     """
     driver function that stores password in database
@@ -81,4 +81,4 @@ def store_in_database(
         "b64",
         "sha256",
     ]
-    write_to_database(row_to_write, database_name, type_of_db)
+    write_to_database(row_to_write, database_name)

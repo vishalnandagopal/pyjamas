@@ -6,7 +6,7 @@ if os.getenv("TO_INPUT"):
     username = input("Enter your username: ")
     plain_text_password = pyjamas.getpass("Enter your password: ")
     pyjamas.store_in_database(
-        username, plain_text_password, "review-1-testing.csv", "csv"
+        username, plain_text_password, "review-1-testing.csv"
     )
 else:
-    pyjamas.store_in_database("vishal", "mypw", "review-1-testing.csv", "csv")
+    pyjamas.store_in_database("vishal", "mypw", "review-1-testing.csv")
