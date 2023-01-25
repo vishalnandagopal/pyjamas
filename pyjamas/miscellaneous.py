@@ -1,7 +1,11 @@
 import os
-"""  Checks if the given file or folder exists in the directory and change the directory accordingly"""
+from dotenv import load_dotenv
+
 
 def check_if_exists_in_directory(file_or_folder_name: str, directory: str = "") -> bool:
+    """
+    Checks if the given file or folder exists in the directory and change the directory accordingly
+    """
     current_working_dir = os.getcwd()
     try:
         if directory:
@@ -13,7 +17,7 @@ def check_if_exists_in_directory(file_or_folder_name: str, directory: str = "") 
         os.chdir(current_working_dir)
 
 
-def load_desired_env_variable(env_variable: str, env_file_name: str = "../pyjamas.env"):
+def load_env_variable(env_variable: str, env_file_name: str = "../pyjamas.env"):
     if check_if_exists_in_directory(env_file_name):
         load_dotenv(env_file_name)
     elif check_if_exists_in_directory("pyjamas.env"):

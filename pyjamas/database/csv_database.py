@@ -1,11 +1,14 @@
-import csv, os
+import csv
+import os
+from colorama import Fore
 
-from ..miscellaneous import check_if_exists_in_directory
+from ..miscellaneous import check_if_exists_in_directory as check_if_exists_in_directory
 from ..passwords import (
-    check_password,
-    get_password,
-    check_if_exists_in_common_passwords_list,
+    check_password as check_password,
+    common_password_checker as common_password_checker,
+    get_password as get_password,
 )
+
 
 def get_database(database_name: str, type_of_db: str = "csv") -> tuple:
     """
@@ -35,7 +38,9 @@ def write_to_database(row_to_write: tuple, database_name: str, type_of_db: str =
     usernames = {row[0] for row in reader}
 
     if username not in usernames:
-        if not check_if_exists_in_common_passwords_list(plain_text_password):
+        if not common_password_checker.check_if_exists_in_common_passwords_list(
+            plain_text_password
+        ):
             row_to_write[1] = get_password(username, plain_text_password)
             writer.writerow(row_to_write)
             print(f"Securely stored password for {username}")
@@ -45,20 +50,24 @@ def write_to_database(row_to_write: tuple, database_name: str, type_of_db: str =
         print(
             f"Username {username} already exists in database, will not be overwritten."
         )
+        if authenticate(username, plain_text_password, database_name):
+            print(f"{Fore.GREEN}Password for {username} is correct.{Fore.RESET}")
+        else:
+            print(f"{Fore.RED}Password for {username} is INCORRECT!.{Fore.RESET}")
 
 
-def authenticate(username: str, password: str) -> bool:
+def authenticate(username: str, plain_text_password: str, database_name: str) -> bool:
     """
     checks if username exists and database and hash of password is same as hashed password in database
     """
-    reader, _ = get_database()
+    reader, _ = get_database(database_name)
 
     hashed_pw = [row[1] for row in reader if row[0] == username][0]
 
     if not hashed_pw:
         return False
 
-    return check_password(username, password, hashed_pw)
+    return check_password(username, plain_text_password, hashed_pw)
 
 
 def store_in_database(

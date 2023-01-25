@@ -4,5 +4,8 @@ By default, the functions to store it in any database, as well as the function t
 
 from getpass import getpass as getpass
 from .database import store_in_database as store_in_database
-from .passwords import check_password as check_password
-from .miscellaneous import load_desired_env_variable as load_desired_env_variable
+from .passwords import (
+    check_password as check_password,
+    common_password_checker as common_password_checker,
+)
+from .miscellaneous import load_env_variable as load_env_variable

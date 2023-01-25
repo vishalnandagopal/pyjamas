@@ -1,7 +1,7 @@
 import pyjamas
 
 
-if pyjamas.load_desired_env_variable("TO_INPUT"):
+if pyjamas.load_env_variable("TO_INPUT"):
     username = input("Enter your username: ")
     plain_text_password = pyjamas.getpass("Enter your password: ")
     pyjamas.store_in_database(
