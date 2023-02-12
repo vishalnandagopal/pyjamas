@@ -2,7 +2,7 @@ import pyjamas, os, dotenv
 
 dotenv.load_dotenv("pyjamas.env")
 
-if os.getenv("TO_INPUT"):
+if not os.getenv("DONT_TAKE_INPUT"):
     username = input("Enter your username: ")
     plain_text_password = pyjamas.getpass("Enter your password: ")
     pyjamas.store_in_database(
