@@ -5,7 +5,7 @@ from colorama import Fore
 from ..miscellaneous import check_if_exists_in_directory as check_if_exists_in_directory
 from ..passwords import (
     check_password as check_password,
-    common_password_checker as common_password_checker,
+    check_if_exists_in_common_passwords_list as check_if_exists_in_common_passwords_list,
     get_password as get_password,
 )
 
@@ -20,7 +20,7 @@ def get_database(database_name: str, type_of_db: str = "csv") -> tuple:
     return reader, writer
 
 
-def write_to_database(row_to_write: tuple, database_name: str, type_of_db: str = "csv"):
+def write_to_database(row_to_write: tuple, database_name: str):
 
     """
     writes header row if database is empty
@@ -38,7 +38,7 @@ def write_to_database(row_to_write: tuple, database_name: str, type_of_db: str =
     usernames = {row[0] for row in reader}
 
     if username not in usernames:
-        if not common_password_checker.check_if_exists_in_common_passwords_list(
+        if not check_if_exists_in_common_passwords_list(
             plain_text_password
         ):
             row_to_write[1] = get_password(username, plain_text_password)

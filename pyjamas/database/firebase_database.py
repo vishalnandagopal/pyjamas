@@ -1,7 +1,9 @@
 from ..miscellaneous import check_if_exists_in_directory
-from ..passwords import check_password as check_password
-from ..passwords import common_password_checker as common_password_checker
-from ..passwords import get_password as get_password
+from ..passwords import (
+    check_password as check_password,
+    check_if_exists_in_common_passwords_list as check_if_exists_in_common_passwords_list,
+    get_password as get_password,
+)
 
 
 def get_database(database_name: str) -> tuple:
