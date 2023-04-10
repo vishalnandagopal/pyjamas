@@ -6,6 +6,10 @@ A Python library for developers to way to securely collect and store data in an 
 
 Pyjamas is a cyber-security-focused project built using Flask and Python that enables developers to easily and securely generate forms for integration into their projects. The core feature of Pyjamas is its ability to create separate databases for each form, with data stored in CSV files. Developers can choose to securely store specific fields in their forms by hashing them, with the option to select any one key as the primary key.
 
+# What is the need for such a library?
+
+We, as students/developers ourselves, need to be able to quickly generate forms for our apps and projects. However, securely storing the data is a challenging task. If we collecting data for research, especially sensitive data, **it is important to store it in a secure way**, but to still have it in an **accessible format** so that security does not act as a hindrance to quick development.
+
 # Running the program
 
 Make sure you have Python on your system. You can check by running `python --version` in a terminal.
