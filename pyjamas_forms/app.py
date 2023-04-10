@@ -11,6 +11,8 @@ from flask import Flask, render_template, request
 """
 loading the config
 """
+
+
 def load_form(filename: str = os.path.dirname(__file__) + "/./pyjamas_config.json"):
     with open(filename, "r") as f:
         return json.load(f)
@@ -140,22 +142,29 @@ renders a ui for searching in the database with the appropriate primary keys
 """
 
 
-@app.route("/lookup", methods=["GET"])
+@app.route("/lookup", methods=["GET", "POST"])
 def lookup():
     try:
         pyjamas_config = load_form()
     except Exception as e:
         print(e)
         pyjamas_config = None
-    return render_template(
-        "lookup.html",
-        form_name=pyjamas_config["form_name"],
-        fields=[
+    if request.method == "GET":
+        return render_template(
+            "lookup.html",
+            form_name=pyjamas_config["form_name"],
+            fields=[
+                key
+                for key, config in pyjamas_config["form_fields"].items()
+                if config["primaryKey"]
+            ],
+        )
+    elif request.method == "POST":
+        return [
             key
             for key, config in pyjamas_config["form_fields"].items()
             if config["primaryKey"]
-        ],
-    )
+        ]
 
 
 """

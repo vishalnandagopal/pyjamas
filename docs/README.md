@@ -21,4 +21,4 @@ Make sure you have Python on your system. You can check by running `python --ver
 1. After running the Flask app, open the url in your browser. Create a form by filling in the required fields, as you desire.
 2. As a developer, you can call the module and perform many functions by issuing API requests at various endpoints.
 
-Read more about the endpoints and issuing requests to them [here](./endpoints)
+Read more about the endpoints and issuing requests to them [here](./endpoints.md)
