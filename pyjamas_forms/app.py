@@ -2,10 +2,17 @@ import json
 import logging
 import logging.config
 import os
+import sys
 
 from crypto import AES_Cipher
 from database import Database
 from flask import Flask, render_template, request
+
+
+port = int(sys.argv[1])
+debug = False
+
+print(f"Running on port:{port}")
 
 
 """
@@ -97,14 +104,13 @@ def submit():
     except:
         pyjamas_config = None
     row = {}
-    print(request.form)
     for form_field, config in pyjamas_config["form_fields"].items():
         data = request.form[form_field]
         if config["isEncrypted"]:
             data = AES_Cipher.encrypt(data)
         row[form_field] = data
     db.write(row)
-
+    print(f"Submitted on port {port}")
     return {"Submitted": True}
 
 
@@ -190,4 +196,4 @@ def insert():
 runs the application
 """
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=80, debug=True)
+    app.run(host="0.0.0.0", port=port, debug=debug)

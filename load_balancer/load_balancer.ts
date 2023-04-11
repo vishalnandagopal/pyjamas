@@ -4,7 +4,6 @@ import path from "path";
 const sprightly = require("sprightly");
 const httpProxy = require("http-proxy");
 
-
 //configures the load balancer to point to the specified port using the specified algorithm
 const [basePort, _count, algorithm] = process.argv.slice(2);
 const count = Number(_count);
@@ -66,7 +65,7 @@ const handler = async (req: express.Request, res: express.Response) => {
         data: body,
         query,
     };
-    const server = `http://localhost:${
+    const server = `http://127.0.0.1:${
         Number(basePort) +
         getServer({
             query,
@@ -75,13 +74,12 @@ const handler = async (req: express.Request, res: express.Response) => {
         })
     }`;
     try {
-        proxy.web(req, res, { target: "http://localhost:5000" });
+        proxy.web(req, res, { target: server });
     } catch (err) {
         console.log(err);
         res.status(500).send("Server error!");
     }
 };
-
 
 app.get("/favicon.ico", (req, res) =>
     res.sendFile(path.join(__dirname, "/favicon.ico"))

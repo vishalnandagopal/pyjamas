@@ -31,10 +31,10 @@ class Database:
             self.writer.writerow(row.keys())
 
         self.writer.writerow(row.values())
-        print(self.writer)
+        # print(self.writer)
         self.rows.append(row)
         self.appendStream.flush()
-        firebase_db.push(row)
+        # firebase_db.push(row)
 
     """
         prints all the rows in the database

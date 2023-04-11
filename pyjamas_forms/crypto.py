@@ -1,8 +1,8 @@
 import base64
 import os
 
-from Cryptodome.Cipher import AES, DES, Blowfish
-from Cryptodome.Util.Padding import pad, unpad
+from Crypto.Cipher import AES, DES, Blowfish
+from Crypto.Util.Padding import pad, unpad
 from dotenv import load_dotenv
 
 load_dotenv(os.path.dirname(__file__) + "/./.env")

@@ -4,7 +4,7 @@
     "description": "",
     "main": "load_balancer.ts",
     "scripts": {
-        "watch": "pnpm nodemon load_balancer.ts 3000 5"
+        "watch": "pnpm nodemon load_balancer.ts 80 2 round-robin"
     },
     "keywords": [],
     "author": "",

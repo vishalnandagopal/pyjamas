@@ -1,6 +1,7 @@
 **testing.py
 *.vscode/
 *.csv
+node_modules/
 
 .DS_STORE
 /pip_test
