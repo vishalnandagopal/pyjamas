@@ -14,6 +14,12 @@ This suite of products help a developer to quickly iterate on and imporve his ac
 
 We, as students/developers ourselves, need to be able to quickly generate forms for our apps and projects. However, securely storing the data is a challenging task. If we collecting data for research, especially sensitive data, **it is important to store it in a secure way**, but to still have it in an **accessible format** so that security does not act as a hindrance to quick development.
 
+# Why should I store my data in a encrypted format? I am sure no one can access my data.
+
+Pyjamas presents a way to achieve basic security without working on the security code yourself. As a developer, it is important to store your clients' and users' data securely, and sometimes it is even required by law. Encrypting the data using a password only you know is a good way to store the data you need to handle.
+
+Even if you are sure no one can access your data, it has been proven many times in the security world that if something can be leaked, it will be leaked.
+
 # Running the program
 
 Make sure you have Python on your system. You can check by running `python --version` in a terminal.
@@ -123,3 +129,18 @@ Read more about the endpoints and issuing requests to them [here]
     3. Parameters
 
     - None
+
+
+# Load balancer component
+
+The integrated load balancer is meant to serve as a simple and quick way for developers to handle large loads of network requests, such as DDoS attack. While it does not prevent or stop DDoS attacks, it can help balance out the load by distributing the requests among different instances of your application, instead of all requests being spammed to one instance.
+
+
+For example, if you have the same app running in 2 instances, one on port 80 and the other on 81, this will equally distribute and send requests to both those apps.
+
+
+Every request will be alternated between all running instances of the app.
+
+## So, what if your load balancer is under attack itself? Do you need to put a load balancer on the load balancer?
+
+The load balancer is extremely optimized to handle requests. It does not process any requests, so it is extremely fast since it just forwards them and does not do any parsing or validation like your app. So it can handle and deal with a much larger load compared to your traditional app, since it is built for this one thing.
