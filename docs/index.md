@@ -95,6 +95,8 @@ Read more about the endpoints and issuing requests to them [here]
 
 4. `/get`
 
+    ![Get  Image](./images/get%20diagram.png)
+
     1. Methods accepted
 
     - `GET`
@@ -113,11 +115,11 @@ Read more about the endpoints and issuing requests to them [here]
     1. Methods accepted
 
     - `GET`
-    
+
     2. Functionality
-    
+
     - This is a UI for the submit function, and it returns a webpage where you can insert data.
-    
+
     3. Parameters
-    
+
     - None
