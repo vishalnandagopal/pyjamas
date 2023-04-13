@@ -49,6 +49,8 @@ Read more about the endpoints and issuing requests to them [here]
 
 2. `/submit`
 
+
+    ![Submit  Image](./images/submit%20diagram.png)
     1. Methods accepted
 
     - `POST`
@@ -70,6 +72,9 @@ Read more about the endpoints and issuing requests to them [here]
         ```
 
 3. `/find`
+
+    ![Find  Image](./images/find%20diagram.png)
+
 
     1. Methods accepted
 
