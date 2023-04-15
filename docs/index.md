@@ -1,6 +1,6 @@
 # Pyjamas
 
-A Python library for developers to way to securely collect and store data in an encrypted manner.
+A Python library for developers to securely collect and store data in an encrypted manner.
 
 # About Pyjamas
 
