@@ -1,0 +1,62 @@
+# Documentation for contributions by Vishal N (20BCE1043)
+
+This documentation is for a part of my contribution to the project, which was implementing the security protocols and ciphers that can be used by developers when they integrate Pyjamas.
+
+
+# How it works?
+
+When developers call the `/submit` endpoint, the following takes place.
+
+![Submit  Image](./images/submit%20diagram.png)
+
+The ciphers we have integrated are all objects of the `Cipher` class.
+
+The `Cipher` class is:-
+```python
+    class Cipher:
+        def __init__(self, encryption_function, decryption_function, description):
+            self.encrypt = encryption_function
+            self.decrypt = decryption_function
+            self.__doc__ = description
+            if not self.testing():
+                raise Exception(
+                    self.__doc__
+                    + " does not seem to be a working decrypt and encrypt functions. Please check the code"
+                )
+                
+        def testing(self) -> bool:
+            msg = "vishal"
+            if self.decrypt(self.encrypt(msg)).casefold() == msg.casefold():
+                return True
+            return False
+
+        def verify(self, plain_text, encrypted_message, is_encrypted):
+            if not is_encrypted:
+                return plain_text == encrypted_message
+            return plain_text.casefold() == self.decrypt(encrypted_message).casefold()
+```
+
+The `testing` function automatically tests every cipher we implement by encrypting and decrypting the text "vishal", and if it does not match, it raises an error. This is a very important step in automated testing, and for ensuring that there is no change to the encryption or decryption function without throwing an error.
+
+The ciphers we have implemented are:-
+1. AES (can be called with `AES_Cipher.encrypt()`)
+2. DES (can be called with `DES_Cipher.encrypt()`)
+3. Blowfish (can be called with `Blowfish_Cipher.encrypt()`)
+4. Caesar Cipher (can be called with `Caesar_Cipher.encrypt()`)
+
+Using the tried and tested `pycryptodome` library, we ensure that these ciphers are implemented without any common vulnerabilities or attacks, like leaking of keys or text.
+
+# Running the Python backend to test the ciphers
+
+Make sure you have Python on your system. You can check by running `python --version` in a terminal.
+
+1. Download the code using [this url](https://github.com/vishalnandagopal/pyjamas/archive/refs/heads/master.zip) or git clone the repo.
+    ```
+    git clone https://github.com/vishalnandagopal/pyjamas/
+    ```
+
+2. In the `pyjamas_forms` folder, open a terminal. Run
+    ```
+    python app.py
+    ```
+3. Open the URL given by Flask in a browser. It is usually [`http://localhost:80`](http://localhost:80).
