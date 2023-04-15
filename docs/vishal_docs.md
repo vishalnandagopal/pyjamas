@@ -1,13 +1,18 @@
 # Documentation for contributions by Vishal N (20BCE1043)
 
-This documentation is for a part of my contribution to the project, which was implementing the security protocols and ciphers that can be used by developers when they integrate Pyjamas.
-
+This documentation is for a part of my contributions to the project, which was implementing the security protocols and ciphers that can be used by developers when they integrate Pyjamas.
 
 # How it works?
 
 When developers call the `/submit` endpoint, the following takes place.
 
 ![Submit  Image](./images/submit%20diagram.png)
+
+The developer can choose any of the ciphers we have implemented. The ciphers we have implemented are:-
+1. AES (can be called with `AES_Cipher.encrypt()`)
+2. DES (can be called with `DES_Cipher.encrypt()`)
+3. Blowfish (can be called with `Blowfish_Cipher.encrypt()`)
+4. Caesar Cipher (can be called with `Caesar_Cipher.encrypt()`)
 
 The ciphers we have integrated are all objects of the `Cipher` class.
 
@@ -38,11 +43,6 @@ The `Cipher` class is:-
 
 The `testing` function automatically tests every cipher we implement by encrypting and decrypting the text "vishal", and if it does not match, it raises an error. This is a very important step in automated testing, and for ensuring that there is no change to the encryption or decryption function without throwing an error.
 
-The ciphers we have implemented are:-
-1. AES (can be called with `AES_Cipher.encrypt()`)
-2. DES (can be called with `DES_Cipher.encrypt()`)
-3. Blowfish (can be called with `Blowfish_Cipher.encrypt()`)
-4. Caesar Cipher (can be called with `Caesar_Cipher.encrypt()`)
 
 Using the tried and tested `pycryptodome` library, we ensure that these ciphers are implemented without any common vulnerabilities or attacks, like leaking of keys or text.
 
