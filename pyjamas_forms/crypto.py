@@ -147,24 +147,31 @@ def blowfish_decrypt(encoded_plaintext):
 
 class Cipher:
     def __init__(self, encryption_function, decryption_function, description):
+        # Initialization function that takes in encryption function, decryption function and a description of the cipher
         self.encrypt = encryption_function
         self.decrypt = decryption_function
         self.__doc__ = description
         if not self.testing():
+            # raise an exception if the testing function fails to verify the encryption and decryption functions
             raise Exception(
                 self.__doc__
                 + " does not seem to be a working decrypt and encrypt functions. Please check the code"
             )
 
     def testing(self) -> bool:
+        # A testing function to verify if encryption and decryption are working correctly, by automatically encrypting and then decrypting and verifying the word "vishal".
         msg = "vishal"
         if self.decrypt(self.encrypt(msg)).casefold() == msg.casefold():
             return True
         return False
 
     def verify(self, plain_text, encrypted_message, is_encrypted):
+        # a function to verify if an encrypted message matches the plain text
         if not is_encrypted:
+            # if the message is not encrypted, return True if it matches the plain text
             return plain_text == encrypted_message
+
+        # otherwise, return True if the decrypted message (in lowercase) matches the plain text (in lowercase)
         return plain_text.casefold() == self.decrypt(encrypted_message).casefold()
 
 
