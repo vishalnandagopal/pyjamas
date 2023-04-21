@@ -130,27 +130,35 @@ The load balancer is extremely optimized to handle requests. It does not process
 Make sure you have Python on your system. You can check by running `python --version` in a terminal.
 
 1. Download the code using [this url](https://github.com/vishalnandagopal/pyjamas/archive/refs/heads/master.zip) or git clone the repo.
+
     ```
     git clone https://github.com/vishalnandagopal/pyjamas/
     ```
 
-2. In the `pyjamas_forms` folder, open a terminal. Run
+2. Install the necessary libraries
+
+    ```
+    cd pyjamas_forms
+    pip install -r requirements.txt
+    ```
+
+3. In the `pyjamas_forms` folder, open a terminal. Run
+
     ```
     python app.py
     ```
-3. Open the URL given by Flask in a browser. It is usually [`http://localhost:80`](http://localhost:80).
 
-4. For the load balancer, open a terminal and cd into the `load_balancer` folder. Install all the node modules. You will need NPM and NodeJS for that. You can download both of them from [here](nodejs.org/download). Once installed, verify your installation using `node --version` and `npm --version`.
+4. Open the URL given by Flask in a browser. It is usually [`http://localhost:80`](http://localhost:80).
+
+5. For the load balancer, open a terminal and cd into the `load_balancer` folder. Install all the node modules. You will need NPM and NodeJS for that. You can download both of them from [here](nodejs.org/download). Once installed, verify your installation using `node --version` and `npm --version`.
     ```
-    cd load_balancer
+    cd ..\\load_balancer
     npm install
     npm watch
     ```
-5. You can mention the ports and the number of instances (integer) it has to protect in the `package.json` file (line 7). For example, if you mention `pnpm nodemon load_balancer.ts 1880 3 round-robin`, it will distribute and forward requests to 3 ports, starting from 1880 (1880, 1881, 1882).
+6. You can mention the ports and the number of instances (integer) it has to protect in the `package.json` file (line 7). For example, if you mention `pnpm nodemon load_balancer.ts 1880 3 round-robin`, it will distribute and forward requests to 3 ports, starting from 1880 (1880, 1881, 1882).
 
 # Using the module
 
 1. After running the Flask app, open the url in your browser. Create a form by filling in the required fields, as you desire.
 2. As a developer, you can call the module and perform many functions by issuing API requests at various endpoints.
-
-Read more about the endpoints and issuing requests to them [here]
